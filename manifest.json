@@ -3,7 +3,7 @@
   "short_name": "GeneraPass",
   "description": "Generador de contraseñas y frases de paso, gratuito y sin servidor.",
   "lang": "es",
-  "start_url": ".",
+  "start_url": "./index.html",
   "scope": ".",
   "display": "standalone",
   "background_color": "#f5f7fa",

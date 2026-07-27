@@ -1,4 +1,4 @@
-const CACHE_NAME = "generapass-v2";
+const CACHE_NAME = "generapass-v3";
 const ASSETS = [
     "./",
     "./index.html",

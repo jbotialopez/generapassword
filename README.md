@@ -1,4 +1,4 @@
-# GeneraPass
+# GeneraContraseña
 
 Generador de contraseñas y frases de paso, 100% en el navegador.
 

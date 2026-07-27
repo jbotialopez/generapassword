@@ -1,10 +1,10 @@
-const CACHE_NAME = "generapass-v4";
+const CACHE_NAME = "generapass-v5";
 const ASSETS = [
     "./",
     "./index.html",
     "./styles.css",
     "./app.js",
-    "./favicon.svg",
+    "./fav1.png",
     "./manifest.json",
     "./icon-192.png",
     "./icon-512.png",

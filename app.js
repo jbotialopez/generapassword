@@ -352,3 +352,11 @@ copyBtn.addEventListener("click", copyPassword);
 
 // Generar al cargar
 applyMode();
+
+// Habilita el uso sin conexión una vez visitada la página con internet.
+// Falla en silencio bajo file:// o si el navegador no soporta service workers.
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js").catch(() => {});
+    });
+}

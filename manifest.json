@@ -1,6 +1,6 @@
 {
-  "name": "GeneraContraseña",
-  "short_name": "GeneraContraseña",
+  "name": "Generador de Contraseñas",
+  "short_name": "GeneraPass",
   "description": "Generador de contraseñas y frases de paso, gratuito y sin servidor.",
   "lang": "es",
   "start_url": "./index.html",

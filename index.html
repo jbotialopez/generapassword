@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de Contraseñas</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<svg class="visually-hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+      <path d="M5 15V6a2 2 0 0 1 2-2h9"></path>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 12l5 5L20 6"></path>
+    </symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 12a8 8 0 0 1 14.5-4.6"></path>
+      <path d="M20 12a8 8 0 0 1-14.5 4.6"></path>
+      <path d="M18 3.5V8h-4.4"></path>
+      <path d="M6 20.5V16h4.4"></path>
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2.5v3M12 18.5v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2.5 12h3M18.5 12h3M4.9 19.1l2.1-2.1M17 7l2.1-2.1"></path>
+    </symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 14.3A8.5 8.5 0 1 1 9.7 4a7 7 0 0 0 10.3 10.3z"></path>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="sheet">
+
+  <aside class="rail">
+    <p class="eyebrow">Generador de<br>contraseñas</p>
+    <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false" aria-label="Cambiar a modo oscuro">
+      <svg class="icon icon-sun" width="15" height="15"><use href="#i-sun"></use></svg>
+      <svg class="icon icon-moon" width="15" height="15"><use href="#i-moon"></use></svg>
+      <span class="theme-toggle-label">Modo</span>
+    </button>
+  </aside>
+
+  <main class="content">
+
+    <div class="row">
+      <p class="index">01 &middot; Tipo</p>
+      <div class="mode-toggle" role="radiogroup" aria-label="Tipo de contraseña">
+        <label class="mode-option">
+          <input type="radio" name="mode" id="modeRandom" value="random" checked>
+          <span>Aleatoria</span>
+        </label>
+        <label class="mode-option">
+          <input type="radio" name="mode" id="modePhrase" value="phrase">
+          <span>Frase</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="row row--split">
+      <div class="field">
+        <p class="index" id="lengthIndex">02 &middot; Longitud</p>
+        <div class="length-line">
+          <input type="range" id="length" min="4" max="128" value="16" aria-label="Longitud de la contraseña">
+          <input type="number" id="lengthNumber" class="length-value" min="4" max="128" step="1" inputmode="numeric" value="16" aria-label="Longitud exacta">
+        </div>
+      </div>
+      <div class="field">
+        <p class="index">03 &middot; Fortaleza</p>
+        <div class="meter" id="meter" data-level="weak">
+          <span class="tick"></span><span class="tick"></span><span class="tick"></span>
+          <span class="tick"></span><span class="tick"></span><span class="tick"></span>
+          <span class="meter-label" id="meterLabel">&mdash;</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <p class="index">04 &middot; Composición</p>
+      <div class="switches" id="switchesRandom">
+        <label class="switch">
+          <input type="checkbox" id="uppercase" checked>
+          <span class="switch-box"></span>Mayúsculas
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="lowercase" checked>
+          <span class="switch-box"></span>Minúsculas
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="numbers" checked>
+          <span class="switch-box"></span>Números
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="symbols">
+          <span class="switch-box"></span>Símbolos
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="noAmbiguous">
+          <span class="switch-box"></span>Evitar caracteres ambiguos
+        </label>
+      </div>
+      <div class="switches" id="switchesPhrase" hidden>
+        <label class="switch">
+          <input type="checkbox" id="phraseCapitalize">
+          <span class="switch-box"></span>Mayúscula inicial
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="phraseNumber">
+          <span class="switch-box"></span>Incluir un número
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <p class="index">05 &middot; Clave generada</p>
+      <div class="result">
+        <input type="text" id="password" class="password" readonly aria-label="Contraseña generada" spellcheck="false">
+        <div class="buttons">
+          <button type="button" id="copyBtn" class="btn btn--outline">
+            <svg class="icon icon-copy" width="14" height="14"><use href="#i-copy"></use></svg>
+            <svg class="icon icon-check" width="14" height="14"><use href="#i-check"></use></svg>
+            Copiar
+          </button>
+          <button type="button" id="generateBtn" class="btn btn--solid">
+            <svg class="icon" width="14" height="14"><use href="#i-refresh"></use></svg>
+            Generar
+          </button>
+        </div>
+      </div>
+      <p class="hint" id="hint" hidden></p>
+      <p class="trust-note">Se genera en tu navegador; no se envía ni se guarda en ningún servidor.</p>
+    </div>
+
+    <span class="visually-hidden" role="status" aria-live="polite" id="srStatus"></span>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
